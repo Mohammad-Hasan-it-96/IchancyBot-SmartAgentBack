@@ -47,8 +47,8 @@ class SendPlanNotifications extends Command
             if ($daysLeft < 0) {
                 $firebase->sendNotification(
                     $user->fcm_token,
-                    "انتهى الاشتراك",
-                    "تم إيقاف الباقة الخاصة بك، يرجى تجديد الاشتراك.",
+                    "🔴 انتهت صلاحية اشتراكك",
+                    "عزيزي العميل، لقد انتهى اشتراكك في المندوب الذكي. جدّد اشتراكك الآن للاستمرار في استخدام جميع المميزات دون انقطاع. 🙏",
                     "plan_deactivated"
                 );
                 $sent++;
@@ -59,8 +59,8 @@ class SendPlanNotifications extends Command
             if ($daysLeft == 7) {
                 $firebase->sendNotification(
                     $user->fcm_token,
-                    "تبقى 7 أيام",
-                    "اشتراكك سينتهي بعد 7 أيام.",
+                    "📅 اشتراكك ينتهي بعد 7 أيام",
+                    "مرحباً! نودّ تذكيرك بأن اشتراكك سينتهي خلال أسبوع. جدّد مسبقاً لتستمر في العمل بدون أي توقف. نقدّر ثقتك بنا! 💙",
                     "still_7_days"
                 );
                 $sent++;
@@ -71,8 +71,8 @@ class SendPlanNotifications extends Command
             if ($daysLeft == 3) {
                 $firebase->sendNotification(
                     $user->fcm_token,
-                    "تبقى 3 أيام",
-                    "اشتراكك سينتهي بعد 3 أيام.",
+                    "⏳ تبقّى 3 أيام على انتهاء اشتراكك",
+                    "تنبيه ودّي! اشتراكك سينتهي بعد 3 أيام فقط. لا تدع العمل يتوقف — جدّد الآن بكل سهولة وتابع إنجازاتك. 🚀",
                     "still_3_days"
                 );
                 $sent++;
@@ -83,8 +83,8 @@ class SendPlanNotifications extends Command
             if ($daysLeft == 1) {
                 $firebase->sendNotification(
                     $user->fcm_token,
-                    "تبقى 24 ساعة",
-                    "اشتراكك سينتهي غداً.",
+                    "⚠️ آخر يوم في اشتراكك!",
+                    "اشتراكك سينتهي غداً. جدّد الآن حتى لا تفوّتك أي لحظة من عملك. نحن هنا دائماً لخدمتك! 😊",
                     "still_1_day"
                 );
                 $sent++;

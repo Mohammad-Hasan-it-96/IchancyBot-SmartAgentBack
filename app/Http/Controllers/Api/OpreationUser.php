@@ -182,6 +182,24 @@ class OpreationUser extends Controller
             'expires_at'  => $expiresAt
         ]);
 
+        // إشعار التفعيل
+        if ($app->fcm_token) {
+            $planLabels = [
+                'half_year' => 'نصف السنوية (6 أشهر)',
+                'yearly'    => 'السنوية (12 شهراً)',
+            ];
+            $planLabel   = $planLabels[$request->plan_id] ?? $request->plan_id;
+            $expiresDate = $expiresAt->format('Y/m/d');
+
+            $firebase = new FirebaseNotificationService();
+            $firebase->send(
+                $app->fcm_token,
+                "🎉 تم تفعيل اشتراكك بنجاح!",
+                "أهلاً {$app->full_name}! تم تفعيل خطّتك {$planLabel} بنجاح ✅\nتنتهي بتاريخ: {$expiresDate}\nنتمنى لك تجربة رائعة معنا 💙",
+                "new_plan_activated"
+            );
+        }
+
         return response()->json([
             'success'    => true,
             'is_verified'=> 1,
@@ -256,47 +274,40 @@ class OpreationUser extends Controller
 
             // انتهاء الاشتراك
             if ($daysLeft < 0) {
-
                 $firebase->send(
                     $user->fcm_token,
-                    "انتهى الاشتراك",
-                    "تم إيقاف الباقة الخاصة بك، يرجى تجديد الاشتراك.",
+                    "🔴 انتهت صلاحية اشتراكك",
+                    "عزيزي {$user->full_name}، لقد انتهى اشتراكك في المندوب الذكي. جدّد اشتراكك الآن للاستمرار في استخدام جميع المميزات دون انقطاع. 🙏",
                     "plan_deactivated"
                 );
-
             }
 
             // قبل 7 أيام
             if ($daysLeft == 7) {
-
                 $firebase->send(
                     $user->fcm_token,
-                    "تبقى 7 أيام",
-                    "اشتراكك سينتهي بعد 7 أيام.",
+                    "📅 اشتراكك ينتهي بعد 7 أيام",
+                    "مرحباً {$user->full_name}! نودّ تذكيرك بأن اشتراكك سينتهي خلال أسبوع. جدّد مسبقاً لتستمر في العمل بدون أي توقف. نقدّر ثقتك بنا! 💙",
                     "still_7_days"
                 );
-
             }
 
             // قبل 3 أيام
             if ($daysLeft == 3) {
-
                 $firebase->sendNotification(
                     $user->fcm_token,
-                    "تبقى 3 أيام",
-                    "اشتراكك سينتهي بعد 3 أيام.",
+                    "⏳ تبقّى 3 أيام على انتهاء اشتراكك",
+                    "تنبيه ودّي يا {$user->full_name}! اشتراكك سينتهي بعد 3 أيام فقط. لا تدع العمل يتوقف — جدّد الآن بكل سهولة وتابع إنجازاتك. 🚀",
                     "still_3_days"
                 );
-
             }
 
             // قبل يوم
             if ($daysLeft == 1) {
-
                 $firebase->sendNotification(
                     $user->fcm_token,
-                    "تبقى 24 ساعة",
-                    "اشتراكك سينتهي غداً.",
+                    "⚠️ آخر يوم في اشتراكك!",
+                    "اشتراكك سينتهي غداً يا {$user->full_name}. جدّد الآن حتى لا تفوّتك أي لحظة من عملك. نحن هنا دائماً لخدمتك! 😊",
                     "still_1_day"
                 );
 
@@ -317,8 +328,8 @@ class OpreationUser extends Controller
         foreach ($users as $user) {
             $response = $firebase->send(
                 $user->fcm_token,
-                "انتهى الاشتراك",
-                "تم إيقاف الباقة الخاصة بك، يرجى تجديد الاشتراك.",
+                "🔴 انتهت صلاحية اشتراكك",
+                "عزيزي {$user->full_name}، لقد انتهى اشتراكك في المندوب الذكي. جدّد اشتراكك الآن للاستمرار في استخدام جميع المميزات دون انقطاع. 🙏",
                 "plan_deactivated"
             );
         }
