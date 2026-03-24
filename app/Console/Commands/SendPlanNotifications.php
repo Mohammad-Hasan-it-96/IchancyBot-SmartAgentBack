@@ -45,6 +45,7 @@ class SendPlanNotifications extends Command
 
             // انتهاء الاشتراك
             if ($daysLeft <= 0 && $daysLeft >= -3) {
+                $user->update(['is_verified' => 0]);
                 $firebase->sendNotification(
                     $user->fcm_token,
                     "🔴 انتهت صلاحية اشتراكك",
