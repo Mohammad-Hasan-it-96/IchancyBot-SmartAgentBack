@@ -44,7 +44,7 @@ class SendPlanNotifications extends Command
             $daysLeft = Carbon::now()->diffInDays(Carbon::parse($user->expires_at), false);
 
             // انتهاء الاشتراك
-            if ($daysLeft < 0) {
+            if ($daysLeft <= 0 && $daysLeft >= -3) {
                 $firebase->sendNotification(
                     $user->fcm_token,
                     "🔴 انتهت صلاحية اشتراكك",
