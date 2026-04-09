@@ -9,10 +9,10 @@
     <meta property="og:description" content="تطبيق لتسجيل طلبيات الأدوية بسهولة وسرعة للمندوبين">
     <title>تحميل تطبيق المندوب الذكي</title>
 
-    <!-- Google Fonts: Cairo for Arabic -->
+    <!-- Google Fonts: Cairo & Amiri -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
         *, *::before, *::after {
@@ -22,10 +22,10 @@
         }
 
         :root {
-            --primary:        #1a56db;
-            --primary-dark:   #1345b7;
-            --primary-light:  #e8f0fe;
-            --secondary:      #0ea5e9;
+            --primary:        #1A4275;
+            --primary-dark:   #0D2A4F;
+            --primary-light:  #e6edf7;
+            --secondary:      #245A9E;
             --accent:         #06b6d4;
             --success:        #10b981;
             --warning:        #f59e0b;
@@ -34,12 +34,12 @@
             --text-medium:    #374151;
             --text-light:     #6b7280;
             --text-muted:     #9ca3af;
-            --bg:             #f8fafc;
+            --bg:             #F8FAFC;
             --surface:        #ffffff;
             --border:         #e5e7eb;
             --shadow-sm:      0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
             --shadow-md:      0 4px 16px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.06);
-            --shadow-lg:      0 10px 40px rgba(0,0,0,.12), 0 4px 16px rgba(0,0,0,.08);
+            --shadow-lg:      0 12px 32px rgba(26,66,117,.15);
             --radius:         16px;
             --radius-sm:      10px;
             --radius-lg:      24px;
@@ -56,9 +56,13 @@
             line-height: 1.6;
         }
 
+        h1, h2, h3, .modal-title, .section-title, .card-label {
+            font-family: 'Amiri', serif;
+        }
+
         /* ── HERO ─────────────────────────────────── */
         .hero {
-            background: linear-gradient(145deg, #1245af 0%, #1a56db 45%, #2563eb 70%, #0ea5e9 100%);
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
             padding: 56px 20px 80px;
             text-align: center;
             position: relative;
@@ -107,11 +111,11 @@
 
         .hero h1 {
             font-size: 2rem;
-            font-weight: 900;
+            font-weight: 700;
             color: #ffffff;
             letter-spacing: .5px;
             margin-bottom: 10px;
-            text-shadow: 0 2px 8px rgba(0,0,0,.15);
+            text-shadow: 0 2px 8px rgba(0,0,0,.3);
         }
 
         .hero .tagline {
@@ -219,15 +223,15 @@
         .btn svg { width: 22px; height: 22px; flex-shrink: 0; }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: #ffffff;
-            box-shadow: 0 4px 20px rgba(26,86,219,.38);
+            box-shadow: 0 4px 20px rgba(26,66,117,.38);
             margin-bottom: 14px;
             font-size: 1.12rem;
         }
 
         .btn-primary:hover {
-            box-shadow: 0 6px 28px rgba(26,86,219,.48);
+            box-shadow: 0 6px 28px rgba(26,66,117,.48);
             transform: translateY(-1px);
         }
 
@@ -276,17 +280,23 @@
         .arch-btn-badge {
             font-size: .63rem;
             font-weight: 700;
-            background: rgba(255,255,255,.22);
+            background: rgba(26,66,117,.1);
+            color: var(--primary);
             border-radius: 50px;
             padding: 2px 9px;
             letter-spacing: .4px;
         }
 
         .btn-arch-64 {
-            background: linear-gradient(135deg, #1a56db, #0ea5e9);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: #fff;
-            box-shadow: 0 4px 16px rgba(26,86,219,.32);
+            box-shadow: 0 4px 16px rgba(26,66,117,.32);
             border: 2px solid transparent;
+        }
+
+        .btn-arch-64 .arch-btn-badge {
+            background: rgba(255,255,255,.2);
+            color: #fff;
         }
 
         .btn-arch-32 {
@@ -412,19 +422,17 @@
         .support-link-item:hover { background: var(--primary-light); }
 
         .support-link-icon {
-            width: 38px;
-            height: 38px;
-            border-radius: 10px;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            background: var(--primary-light);
         }
 
-        .support-link-icon.email { background: #fee2e2; }
-        .support-link-icon.telegram { background: #e0f2fe; }
-
-        .support-link-icon svg { width: 20px; height: 20px; }
+        .support-link-icon svg { width: 22px; height: 22px; fill: var(--primary); }
 
         .support-link-text strong {
             display: block;
@@ -446,11 +454,12 @@
             text-align: center;
             padding: 28px 16px 32px;
             font-size: .8rem;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border);
+            color: rgba(255,255,255,.7);
+            background: var(--primary-dark);
             margin-top: 24px;
         }
 
+        footer p { margin: 0; color: #fff; opacity: 0.8; }
         footer p + p { margin-top: 4px; }
 
         /* ── MODAL ────────────────────────────────── */
@@ -535,12 +544,13 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+            background: #f3f4f6;
         }
 
-        .modal-option-icon.icon-64 { background: linear-gradient(135deg, #dbeafe, #bfdbfe); }
+        .modal-option-icon.icon-64 { background: var(--primary-light); }
         .modal-option-icon.icon-32 { background: #f3f4f6; }
 
-        .modal-option-icon svg { width: 24px; height: 24px; }
+        .modal-option-icon svg { width: 24px; height: 24px; fill: var(--primary); }
 
         .modal-option-text strong {
             display: block;
@@ -693,27 +703,39 @@
                 إذا واجهت مشكلة في التنزيل أو التثبيت، تواصل معنا وسنكون سعداء بمساعدتك.
             </p>
             <div class="support-links">
-                <a href="mailto:smartAgentAppSupport@gmail.com" class="support-link-item">
+                <a href="mailto:smart.agent.app.support@gmail.com" class="support-link-item">
                     <div class="support-link-icon email">
-                        <svg viewBox="0 0 24 24" fill="#dc2626">
+                        <svg viewBox="0 0 24 24">
                             <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
                         </svg>
                     </div>
                     <div class="support-link-text">
                         <strong>البريد الإلكتروني</strong>
-                        <span>smartAgentAppSupport@gmail.com</span>
+                        <span>smart.agent.app.support@gmail.com</span>
                     </div>
                 </a>
 
-                <a href="https://t.me/smartAgentSupport" class="support-link-item">
+                <a href="https://wa.me/963959027196" class="support-link-item" target="_blank">
+                    <div class="support-link-icon whatsapp">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+                        </svg>
+                    </div>
+                    <div class="support-link-text">
+                        <strong>واتساب</strong>
+                        <span>963959027196+</span>
+                    </div>
+                </a>
+
+                <a href="https://t.me/+963959027196" class="support-link-item" target="_blank">
                     <div class="support-link-icon telegram">
-                        <svg viewBox="0 0 24 24" fill="#0284c7">
+                        <svg viewBox="0 0 24 24">
                             <path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/>
                         </svg>
                     </div>
                     <div class="support-link-text">
                         <strong>تيليغرام</strong>
-                        <span>@smartAgentSupport</span>
+                        <span>حساب الدعم الفني</span>
                     </div>
                 </a>
             </div>
