@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\AppHarfosh;
 use App\Services\AppUpdateService;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AppDownloadController extends Controller
 {
@@ -38,6 +42,43 @@ class AppDownloadController extends Controller
             'updateNotes',
             'fetchFailed'
         ));
+    }
+
+    public function add_review(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'device_id' => 'required|string|max:255',
+            'app_name'  => 'required|string|max:255',
+            'stars'     => 'required|integer|min:1|max:5',
+            'comment'   => 'nullable|string|max:1000',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation error',
+                'errors'  => $validator->errors()
+            ], 422);
+        }
+
+        $app = AppHarfosh::where('device_id', $request->device_id)
+            ->where('app_name', $request->app_name)
+            ->first();
+
+        if (!$app) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Device not found'
+            ], 404);
+        }
+        $app->update([
+            'stars'   => $request->stars,
+            'comment' => $request->comment,
+        ]);
+
+        return response()->json([
+            'success'     => true,
+        ], 200);
     }
 }
 

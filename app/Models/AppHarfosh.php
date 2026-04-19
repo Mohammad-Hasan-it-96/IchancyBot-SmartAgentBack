@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AppHarfosh extends Model
 {
-    
+
     protected $table = "app_harfoshs";
     /**
      * The attributes that are mass assignable.
@@ -15,7 +15,7 @@ class AppHarfosh extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'app_name','device_id','full_name','phone','is_verified','expires_at','plan_id','fcm_token'
+        'app_name','device_id','full_name','phone','is_verified','expires_at','plan_id','fcm_token','stars','comment'
     ];
 
 }

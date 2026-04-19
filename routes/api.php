@@ -31,3 +31,4 @@ use Illuminate\Support\Facades\Route;
     Route::get("/send_plan_notifications",[OpreationUser::class,'sendPlanNotifications']);
     Route::get("/test_send_notifications",[OpreationUser::class,'testSendNotifications']);
     Route::get('/app-download', [AppDownloadController::class, 'index'])->name('app.download');
+    Route::post('/add_review', [AppDownloadController::class, 'add_review']);
